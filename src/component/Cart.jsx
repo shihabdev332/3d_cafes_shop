@@ -70,16 +70,8 @@ const Cart = ({ cartItems, setCartItems }) => {
     setOrderStatus({ type: "", text: "" });
 
     try {
-      // Safely resolve the shop identity from the available cart dataset structure
-      const resolvedShopId = 
-        cartItems[0]?.product?.shop?._id || 
-        cartItems[0]?.product?.shop || 
-        cartItems[0]?.shop || 
-        "65ed1a2b3c4d5e6f7a8b9c0d";
-
       // Map cart dataset to match exact backend Mongoose Schema requirements
       const orderPayload = {
-        shop: resolvedShopId,
         items: cartItems.map((item) => ({
           product: item.product?._id || item.product || item._id || item.id,
           quantity: Number(item.quantity),

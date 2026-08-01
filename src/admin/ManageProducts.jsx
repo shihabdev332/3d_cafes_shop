@@ -14,6 +14,7 @@ const ManageProducts = () => {
 
   // Storing raw file objects for backend upload
   const [imageFiles, setImageFiles] = useState([null, null, null, null]);
+  const [originalImages, setOriginalImages] = useState([]);
 
   // Form State with Multi-Image Capabilities
   const [formData, setFormData] = useState({
@@ -81,6 +82,12 @@ const ManageProducts = () => {
     submissionData.append('description', formData.description);
     submissionData.append('inStock', formData.inStock);
 
+    if (editingId) {
+      const retainedImages = new Set(formData.images.filter((image) => originalImages.includes(image)));
+      const removedImages = originalImages.filter((image) => !retainedImages.has(image));
+      submissionData.append('removedImages', JSON.stringify(removedImages));
+    }
+
     imageFiles.forEach((file) => {
       if (file) {
         submissionData.append('images', file);
@@ -125,6 +132,7 @@ const ManageProducts = () => {
     });
     
     setImageFiles([null, null, null, null]);
+    setOriginalImages(dbImages);
   };
 
   const handleDelete = async (id) => {
@@ -142,6 +150,7 @@ const ManageProducts = () => {
   const resetForm = () => {
     setFormData({ name: '', price: '', category: 'Coffee', description: '', images: ['', '', '', ''], inStock: true });
     setImageFiles([null, null, null, null]);
+    setOriginalImages([]);
     setEditingId(null);
   };
 
