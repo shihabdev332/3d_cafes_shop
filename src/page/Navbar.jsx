@@ -183,16 +183,16 @@ const Navbar = () => {
           <Link to="/menu" onClick={closeMenu} className="hover:text-gray-400 transition-colors">MENUS</Link>
 
          
-          <Link to="/careers" className="hover:text-amber-400 transition-colors">Careers</Link>
+          <Link to="/careers" onClick={closeMenu} className="hover:text-amber-400 transition-colors">Careers</Link>
           <Link to="/cart" onClick={closeMenu} className="hover:text-amber-400 transition-colors text-zinc-300 flex items-center justify-center gap-2">
           
             MY CART ({cartCount})
           </Link>
-          <Link to="/private-dining" className="hover:text-amber-400 transition-colors">Private Dining</Link>
-             <Link to="/blog" className="hover:text-amber-400 transition-colors">Blog</Link>
+          <Link to="/private-dining" onClick={closeMenu} className="hover:text-amber-400 transition-colors">Private Dining</Link>
+             <Link to="/blog" onClick={closeMenu} className="hover:text-amber-400 transition-colors">Blog</Link>
 
-              <Link to="/contact" className="hover:text-amber-400 transition-colors">Contact</Link>
-              <Link to="/my-orders" className="hover:text-amber-400 transition-colors">My Orders</Link>
+              <Link to="/contact" onClick={closeMenu} className="hover:text-amber-400 transition-colors">Contact</Link>
+              <Link to="/my-orders" onClick={closeMenu} className="hover:text-amber-400 transition-colors">My Orders</Link>
           
           {isLoggedIn && (
             role === 'admin' ? (
